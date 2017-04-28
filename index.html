@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <!-- sql.js allows you to make SQL queries from javascript -->
+        <script src='js/SQL.js'></script>
+        <script src='js/dbController.js'></script>
+        <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+
+    <body>
+    	<h1 style="text-align:center;color:white;">wineDB</h1>
+
+	    <div class="row">
+	  		<!-- Criteria Selection -->
+	  		<div class="col-md-3">
+		  		<div class="well well-sm">
+		  			<h3>Filter Criteria</h3>
+		  			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="headingOne">
+					      <h4 class="panel-title">
+					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					          Style
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+					      <div class="panel-body">
+					      		<div id="styleCheckboxes"></div>
+					      </div>
+					    </div>
+					  </div>
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="headingTwo">
+					      <h4 class="panel-title">
+					        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					          Country
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+					      <div class="panel-body">
+					      		<div id="countryCheckboxes"></div>
+					      </div>
+					    </div>
+					  </div>
+					  <!-- Region dropdown -->
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="headingThree">
+					      <h4 class="panel-title">
+					        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+					          Region
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+					      <div class="panel-body">
+					      		<div id="regionCheckboxes"></div>
+					      </div>
+					    </div>
+					  </div>
+					  <!-- Budget dropdown -->
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="headingFour">
+					      <h4 class="panel-title">
+					        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+					          Max Budget
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+					      <div class="panel-body">
+					      		<div id="priceRadio">
+					    			<div class="radio"><label><input id="money_0" onclick="getBudgetWines()" type="radio" name="optradio" value=10>$10</label></div>
+									<div class="radio"><label><input id="money_1" onclick="getBudgetWines()" type="radio" name="optradio" value=20>$20</label></div>
+									<div class="radio"><label><input id="money_2" onclick="getBudgetWines()" type="radio" name="optradio" value=30>$30</label></div>
+									<div class="radio"><label><input id="money_3" onclick="getBudgetWines()" type="radio" name="optradio" value=40>$40</label></div>
+									<div class="radio"><label><input id="money_4" onclick="getBudgetWines()" type="radio" name="optradio" value=1999>$50+</label></div>
+					    		</div>
+					      </div>
+					    </div>
+					  </div>
+					  <!-- Alcohol dropdown -->
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="headingFive">
+					      <h4 class="panel-title">
+					        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+					          Min ABV
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+					      <div class="panel-body">
+					      		<div id="alcRadio">
+					    			<div class="radio"><label><input id="abv_0" onclick="getAlcoholicWines()" type="radio" name="optradio" value=5.0>5%</label></div>
+									<div class="radio"><label><input id="abv_1" onclick="getAlcoholicWines()" type="radio" name="optradio" value=7.5>7.5%</label></div>
+									<div class="radio"><label><input id="abv_2" onclick="getAlcoholicWines()" type="radio" name="optradio" value=10.0>10%</label></div>
+									<div class="radio"><label><input id="abv_3" onclick="getAlcoholicWines()" type="radio" name="optradio" value=12.5>12.5%</label></div>
+									<div class="radio"><label><input id="abv_4" onclick="getAlcoholicWines()" type="radio" name="optradio" value=14.0>You sure you don't just want a cocktail? <span class="glyphicon glyphicon-glass" aria-hidden="true"></span></label>
+								</div>
+					    	</div>
+					      </div>
+					    </div>
+					  </div>
+
+					</div>
+		  		</div> <!-- end of col-md-3 -->
+
+	  		</div> <!-- end of col-md-3 -->
+
+	  		<div class="col-md-9">
+				<table id="wineTable" class="table">
+		        	<tr bgcolor="#F4F4F4">
+					    <th>Producer</th>
+					    <th>Name</th> 
+					    <th>Country</th>
+					    <th>Region</th>
+					    <th>Expected Characteristics</th>
+					</tr>
+					<tbody id="wineTbody"></tbody>
+					<!-- Wines will be appended here. -->
+  				</table>
+	  		</div>
+		</div>
+    	
+        
+        
+    </body>
+</html>
